@@ -1,0 +1,134 @@
+
+//
+// Dependencies
+//
+
+@import "variables.less";
+@import "normalize.less";
+@import "mixins.less";
+
+
+//
+// Stuff
+//
+
+
+html,
+body {
+    background-color: @body-background;
+}
+body {
+    padding: 5%;
+    font-family: @font-family-sans-serif;
+    font-size: @font-size-base;
+    font-weight: 400;
+    line-height: @line-height-base;
+    text-align: center;
+    color: @text-color;
+}
+
+// Links
+a {
+    color: @link-color;
+    text-decoration: none;
+    &:hover {
+        color: @link-color-hover;
+        text-decoration: underline;
+    }
+
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+    font-family: @headings-font-family;
+    font-weight: @headings-font-weight;
+    line-height: 1.2;
+    color: @headings-color;
+    margin: 30px 0 10px;
+}
+
+h1 {
+    font-size: @font-size-large;
+}
+
+p {
+    margin: 0 0 15px;
+}
+
+ol,
+ul {
+    margin: 0 0 15px 25px;
+    padding: 0;
+}
+.list-unstyled {
+    margin-left: 0;
+    li {
+        display: block;
+    }
+
+}
+
+
+// Buttons
+.btn {
+    margin-bottom: 5px;
+    padding: .5em 1.5em;
+    line-height: 1;
+    display: inline-block;
+    color: @link-color;
+    text-align: center;
+    letter-spacing: -1px;
+    background: darken(@brand-light, 2%);
+    border-radius: 3px;
+
+    &:hover,
+    &:active {
+        color: #fff;
+        text-decoration: none;
+        background-color: @link-color;
+    }
+
+    &:active {
+        background-color: @brand-dark;
+    }
+
+}
+
+footer {
+    margin-top: @line-height-base*4;
+}
+
+// Responsive
+@media screen and (min-width: 820px) {
+    
+    body {
+        padding: 10%;
+    }
+
+    .btn {
+        
+        margin-bottom: 0;
+    }
+
+    // Push over the container contents to make room
+    .container {
+        margin-left: 30%;
+        margin-right: 10%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+}
+
+// Larger responsive
+@media screen and (min-width: 1100px) {
+    body {
+        padding: 15%;
+        font-size: @font-size-large;
+    }
+    
+    h1 {
+        font-size: @font-size-large*1.25;
+    }
+
+}
