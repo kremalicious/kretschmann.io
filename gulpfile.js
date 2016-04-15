@@ -19,9 +19,7 @@ var onError = function(error) {
 }
 
 var src       = 'src/',
-    dist      = 'dist/',
-    s3bucket  = 'kretschmann.io',
-    s3region  = 'eu-west-1';
+    dist      = 'dist/';
 
 //
 // clean everything
@@ -127,26 +125,17 @@ gulp.task('watch', function () {
 
 
 //
-// S3 Deployment
+// rsync Deployment
 //
-gulp.task('s3', function() {
-
-    var publisher = $.awspublish.create({
-        params: { 'Bucket': s3bucket }, 'region': s3region
-    });
-
-    // define custom headers
-    var headers = {
-        'Cache-Control': 'max-age=315360000, no-transform, public',
-        'x-amz-acl': 'public-read'
-    };
-
-    return gulp.src(dist + '**/*')
-        .pipe($.awspublish.gzip({ ext: '' })) // gzip all the things
-        .pipe(parallelize(publisher.publish(), 10))
-        .pipe(publisher.sync()) // delete files in bucket that are not in local folder
-        .pipe(publisher.cache())
-        .pipe($.awspublish.reporter({ states: ['create', 'update', 'delete'] }));
+gulp.task('deploy', function() {
+    return gulp.src(dist)
+        .pipe($.rsync({
+            root: dist,
+            hostname: 'kretschmann',
+            destination: '/var/www/kretschmann.io/html',
+            recursive: true,
+            clean: true
+        }));
 });
 
 
@@ -171,18 +160,6 @@ gulp.task('build', function (callback) {
         'revision',
         'revision-replace',
         'optimize:html',
-        callback
-    );
-});
-
-
-//
-// gulp deploy: Deployment with fresh production build
-//
-gulp.task('deploy', function (callback) {
-    runSequence(
-        'build',
-        's3',
         callback
     );
 });
