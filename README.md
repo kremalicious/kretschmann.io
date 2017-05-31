@@ -11,6 +11,4 @@ placeholder thingy
 
 `gulp build`
 
-`gulp dist`
-
 `gulp deploy`
