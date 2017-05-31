@@ -37,8 +37,7 @@ gulp.task('clean', function (cb) {
 gulp.task('css', function () {
     return gulp.src(src + 'less/kretschmannio.less')
         .pipe($.less()).on('error', onError)
-        .pipe($.combineMq({ beautify: false }))
-        .pipe($.autoprefixer({ browsers: 'last 4 versions' }))
+        .pipe($.autoprefixer({ browsers: 'last 2 versions' }))
         .pipe($.cssmin())
         .pipe($.rename({suffix: '.min'}))
         .pipe(gulp.dest(dist + 'assets/css'))
