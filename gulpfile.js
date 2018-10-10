@@ -118,7 +118,6 @@ gulp.task('connect', function () {
 // Watch task
 //
 gulp.task('watch', function () {
-    gulp.watch([src + '**/*.{html,xml,json}'], ['html']);
     gulp.watch([src + 'less/**/*.less'], ['css']);
 });
 
